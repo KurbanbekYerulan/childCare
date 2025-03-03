@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screenpipe Parental Control</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Screenpipe Parental Control</h1>
+        <p>Monitor and manage your children's screen time</p>
+    </header>
+    
+    <main id="dashboard-container">
+        <!-- This div will be replaced when data loads -->
+        <div class="loading">Loading dashboard data...</div>
+        
+        <!-- Summary Section -->
+        <section id="summary-section" class="dashboard-section" style="display: none;">
+            <h2>Dashboard Summary</h2>
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <h3>Total Screen Time</h3>
+                    <p id="total-screen-time">0 min</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Productive Time</h3>
+                    <p id="productive-time">0 min</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Active Alerts</h3>
+                    <p id="active-alerts">0</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Children Section -->
+        <section id="children-section" class="dashboard-section" style="display: none;">
+            <h2>Children</h2>
+            <div id="children-container" class="card-container">
+                <!-- Children cards will be added here dynamically -->
+            </div>
+        </section>
+        
+        <!-- Alerts Section -->
+        <section id="alerts-section" class="dashboard-section" style="display: none;">
+            <h2>Alerts</h2>
+            <div id="alerts-container" class="card-container">
+                <!-- Alert cards will be added here dynamically -->
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <button id="refresh-btn" class="btn">Refresh Dashboard</button>
+        <p>&copy; 2025 Screenpipe Parental Control</p>
+    </footer>
+    
+    <script src="/js/dashboard.js"></script>
+</body>
+</html>
