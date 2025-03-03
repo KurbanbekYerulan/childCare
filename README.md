@@ -216,10 +216,10 @@ Modify the CSS in `frontend/css/styles.css` to customize the dashboard's appeara
 
 ## Contributors
 
-- **Aniket** (Discord: patelaniket12) - Project Lead & Backend Development
-- **Chirag** (Discord: 0_chirag_s) - Database Design & API Integration
-- **Watermelon** (Discord: melonwaterbottle) - Frontend Development & UI Design
-- **ルフィ** (Discord: luffyznft) - AI Integration & Content Analysis
+- **Aniket** (Discord: patelaniket12)
+- **Chirag** (Discord: 0_chirag_s)
+- **Watermelon** (Discord: melonwaterbottle)
+- **ルフィ** (Discord: luffyznft)
 
 ## Future Enhancements
 
