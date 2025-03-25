@@ -10,10 +10,11 @@ import random
 sys.path.append(os.path.join(os.path.dirname(__file__), 'App'))
 
 # Import your actual modules
-from screenpipe_connector import ScreenpipeConnector
-from llama_client import LlamaClient
-from query_engine import QueryEngine
-import config
+from App.screenpipe_connector import ScreenpipeConnector
+from App.llama_client import LlamaClient
+from App.query_engine import QueryEngine
+import App.config as config
+
 
 def get_db_connection():
     """Connect to the database"""
@@ -359,9 +360,9 @@ def update_all_children():
     finally:
         conn.close()
 
-def update_alex_data():
-    """Update Alex's data using real-time OCR and analysis"""
-    print("Starting update for Alex's data...")
+def update_aina_data():
+    """Update Aina's data using real-time OCR and analysis"""
+    print("Starting update for Aina's data...")
     
     # Initialize your actual components
     print("Initializing Screenpipe connector and Llama client...")
@@ -390,27 +391,27 @@ def update_alex_data():
     conn = get_db_connection()
     
     try:
-        # Get Alex's ID or create if not exists
-        alex = conn.execute("SELECT id, age FROM children WHERE name = 'Alex'").fetchone()
+        # Get Aina's ID or create if not exists
+        Aina = conn.execute("SELECT id, age FROM children WHERE name = 'Aina'").fetchone()
         
-        if not alex:
-            print("Alex not found in the database. Creating a new child named Alex...")
+        if not Aina:
+            print("Aina not found in the database. Creating a new child named Aina...")
             conn.execute(
                 "INSERT INTO children (parent_id, name, age, device_type) VALUES (?, ?, ?, ?)",
-                (1, "Alex", 10, "Tablet")
+                (1, "Aina", 10, "Tablet")
             )
             conn.commit()
-            alex = conn.execute("SELECT id, age FROM children WHERE name = 'Alex'").fetchone()
+            Aina = conn.execute("SELECT id, age FROM children WHERE name = 'Aina'").fetchone()
         
-        child_id = alex['id']
-        child_age = alex['age']
+        child_id = Aina['id']
+        child_age = Aina['age']
         
-        # Update Alex's data using the common function
-        success = update_child_data(child_id, "Alex", child_age, screenpipe, llama, query_engine)
+        # Update Aina's data using the common function
+        success = update_child_data(child_id, "Aina", child_age, screenpipe, llama, query_engine)
         
         if success:
             # Display the updated data
-            print("\nUpdated information for Alex:")
+            print("\nUpdated information for Aina:")
             child_info = conn.execute(
                 "SELECT name, age, device_type FROM children WHERE id = ?",
                 (child_id,)
@@ -438,14 +439,14 @@ def update_alex_data():
                 print(f"Current App: {current_session['app_name']}")
                 print(f"Current Session: Started at {current_session['start_time']} ({current_session['duration_minutes']} minutes ago)")
             
-            print("\nData update complete! The dashboard will now show Alex's latest activity.")
+            print("\nData update complete! The dashboard will now show Aina's latest activity.")
             print("Refresh the dashboard to see the updated data.")
         
     except sqlite3.Error as e:
         print(f"Database error: {e}")
         conn.rollback()
     except Exception as e:
-        print(f"Error updating Alex's data: {e}")
+        print(f"Error updating Aina's data: {e}")
         import traceback
         traceback.print_exc()
         conn.rollback()
@@ -458,7 +459,7 @@ def continuous_monitoring(interval=300, all_children=False):
     
     Args:
         interval: Time in seconds between updates
-        all_children: Whether to update all children or just Alex
+        all_children: Whether to update all children or just Aina
     """
     print(f"Starting continuous monitoring (updating every {interval} seconds)...")
     
@@ -469,7 +470,7 @@ def continuous_monitoring(interval=300, all_children=False):
             if all_children:
                 update_all_children()
             else:
-                update_alex_data()
+                update_aina_data()
                 
             print(f"Waiting {interval} seconds until next update...")
             time.sleep(interval)
@@ -482,7 +483,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Update children's data with real-time OCR and analysis")
     parser.add_argument("--continuous", action="store_true", help="Run in continuous monitoring mode")
     parser.add_argument("--interval", type=int, default=300, help="Update interval in seconds (default: 300)")
-    parser.add_argument("--all", action="store_true", help="Update all children, not just Alex")
+    parser.add_argument("--all", action="store_true", help="Update all children, not just Aina")
     
     args = parser.parse_args()
     
@@ -492,4 +493,4 @@ if __name__ == "__main__":
         if args.all:
             update_all_children()
         else:
-            update_alex_data() 
+            update_aina_data() 

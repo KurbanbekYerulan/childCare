@@ -13,7 +13,7 @@ class LlamaClient:
     def __init__(self, api_url=None):
         """Initialize the Google Gemini client with rate limiting."""
         self.api_url = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-pro:generateContent"
-        self.api_key = os.environ.get("GOOGLE_API_KEY", "MY_API")
+        self.api_key = os.environ.get("GOOGLE_API_KEY", "AIzaSyB-y7FL1Ut9lSDf0N2-FL1Qn3KHvOaF244")
         self.temperature = config.LLAMA_TEMPERATURE
         self.max_tokens = config.LLAMA_MAX_TOKENS
         

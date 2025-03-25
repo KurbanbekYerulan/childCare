@@ -11,20 +11,20 @@ def get_db_connection():
     return conn
 
 def force_refresh():
-    """Force refresh the dashboard data for Alex"""
+    """Force refresh the dashboard data for Aina"""
     conn = get_db_connection()
     
     try:
-        # Get Alex's ID
-        alex = conn.execute("SELECT id FROM children WHERE name = 'Alex'").fetchone()
+        # Get Aina's ID
+        Aina = conn.execute("SELECT id FROM children WHERE name = 'Aina'").fetchone()
         
-        if not alex:
-            print("ERROR: Alex not found in the database!")
+        if not Aina:
+            print("ERROR: Aina not found in the database!")
             return
         
-        child_id = alex['id']
+        child_id = Aina['id']
         
-        # Update the current session with the latest data from your update_alex_data.py run
+        # Update the current session with the latest data from your update_Aina_data.py run
         conn.execute(
             """
             UPDATE current_sessions
@@ -44,7 +44,7 @@ def force_refresh():
                 (child_id, 'Terminal', datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 30)
             )
         
-        # Update Alex's status
+        # Update Aina's status
         try:
             conn.execute(
                 """

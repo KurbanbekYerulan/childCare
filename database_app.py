@@ -189,8 +189,8 @@ def get_children():
         # Return hardcoded data as fallback
         return jsonify([
             {
-                'id': 1,
-                'name': 'Alex',
+                'id': 5,
+                'name': 'Aina',
                 'age': 10,
                 'device_type': 'Tablet',
                 'status': 'Online',
@@ -278,32 +278,14 @@ def get_alerts():
         # Return hardcoded data as fallback
         return jsonify([
             {
-                'id': 1,
-                'child_id': 1,
-                'child_name': 'Alex',
+                'id': 5,
+                'child_id': 5,
+                'child_name': 'Aina',
                 'app_name': 'Terminal',
-                'message': 'Excessive screen time detected: Alex has used Terminal multiple times today',
+                'message': 'Excessive screen time detected: Aina has used Terminal multiple times today',
                 'severity': 'MEDIUM',
                 'timestamp': (datetime.now() - timedelta(minutes=15)).strftime('%Y-%m-%d %H:%M:%S'),
                 'error': str(e)
-            },
-            {
-                'id': 2,
-                'child_id': 3,
-                'child_name': 'Noah',
-                'app_name': 'Minecraft',
-                'message': 'Extended gaming session: Noah has been playing Minecraft for over 45 minutes',
-                'severity': 'LOW',
-                'timestamp': (datetime.now() - timedelta(minutes=30)).strftime('%Y-%m-%d %H:%M:%S')
-            },
-            {
-                'id': 3,
-                'child_id': 4,
-                'child_name': 'Sophia',
-                'app_name': 'YouTube Kids',
-                'message': 'Content warning: Some videos may not be age-appropriate',
-                'severity': 'HIGH',
-                'timestamp': (datetime.now() - timedelta(minutes=10)).strftime('%Y-%m-%d %H:%M:%S')
             }
         ])
 
@@ -376,10 +358,10 @@ def debug_info():
 def update_data():
     try:
         # Import your update script
-        import update_alex_data
+        import update_aina_data
         
         # Run the update function
-        update_alex_data.update_alex_data()
+        update_aina_data.update_aina_data()
         
         return jsonify({'success': True, 'message': 'Data updated successfully'})
     except Exception as e:
@@ -443,7 +425,7 @@ def check_alerts():
                 VALUES (?, ?, ?, ?, ?, ?)
                 """,
                 (
-                    1,  # Assuming child_id 1 is Alex
+                    5,  # Assuming child_id 1 is Aina
                     app_name, 
                     f"Potentially inappropriate content detected in {app_name}: {', '.join(concerns) if concerns else 'Content may not be suitable for children'}", 
                     "HIGH", 
@@ -461,7 +443,7 @@ def check_alerts():
             FROM app_usage
             WHERE child_id = ? AND date(start_time) = ?
             """,
-            (1, today)  # Assuming child_id 1 is Alex
+            (5, today)  # Assuming child_id 5 is Aina
         ).fetchone()['count']
         
         if usage_count >= 3:
@@ -473,9 +455,9 @@ def check_alerts():
                 VALUES (?, ?, ?, ?, ?, ?)
                 """,
                 (
-                    1,  # Assuming child_id 1 is Alex
+                    5,  # Assuming child_id 1 is Aina
                     app_name, 
-                    f"Excessive screen time detected: Alex has used {app_name} multiple times today, totaling over {usage_count * 15} minutes", 
+                    f"Excessive screen time detected: Aina has used {app_name} multiple times today, totaling over {usage_count * 15} minutes",
                     "MEDIUM", 
                     datetime.now().strftime('%Y-%m-%d %H:%M:%S'), 
                     0

@@ -11,7 +11,7 @@ def get_db_connection():
     return conn
 
 def check_database():
-    """Check the database for Alex's current data"""
+    """Check the database for Aina's current data"""
     conn = get_db_connection()
     
     try:
@@ -24,23 +24,23 @@ def check_database():
             print("ERROR: current_sessions table does not exist!")
             return
         
-        # Get Alex's data
-        alex = conn.execute(
+        # Get Aina's data
+        aina = conn.execute(
             """
             SELECT c.id, c.name, c.age, c.device_type, c.status
             FROM children c
-            WHERE c.name = 'Alex'
+            WHERE c.name = 'aina'
             """
         ).fetchone()
         
-        if not alex:
-            print("ERROR: Alex not found in the database!")
+        if not aina:
+            print("ERROR: Aina not found in the database!")
             return
         
-        print(f"Alex found in database (ID: {alex['id']})")
-        print(f"Age: {alex['age']}")
-        print(f"Device: {alex['device_type']}")
-        print(f"Status: {alex['status'] if 'status' in alex else 'No status column'}")
+        print(f"Aina found in database (ID: {aina['id']})")
+        print(f"Age: {aina['age']}")
+        print(f"Device: {aina['device_type']}")
+        print(f"Status: {aina['status'] if 'status' in aina else 'No status column'}")
         
         # Get current session
         current_session = conn.execute(
@@ -49,11 +49,11 @@ def check_database():
             FROM current_sessions
             WHERE child_id = ?
             """,
-            (alex['id'],)
+            (aina['id'],)
         ).fetchone()
         
         if not current_session:
-            print("ERROR: No current session found for Alex!")
+            print("ERROR: No current session found for Aina!")
         else:
             print(f"Current App: {current_session['app_name']}")
             print(f"Session Start: {current_session['start_time']}")
@@ -68,7 +68,7 @@ def check_database():
             ORDER BY start_time DESC
             LIMIT 5
             """,
-            (alex['id'],)
+            (aina['id'],)
         ).fetchall()
         
         print("\nRecent app usage:")
